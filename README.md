@@ -1,6 +1,6 @@
 # biom-auth
 
-This repository corresponds to the implementation in the article "**Privacy Preserving Biometric Authentication for Fingerprints and Beyond**" to appear in the Proceedings of the Fourteenth ACM Conference on Data and Application Security and Privacy, 2024. The full version can be found [here](https://eprint.iacr.org/2024/525.pdf).
+This repository corresponds to the implementation in the article "**Privacy Preserving Biometric Authentication for Fingerprints and Beyond**" published in the Proceedings of the Fourteenth ACM Conference on Data and Application Security and Privacy, 2024. The full version can be found [here](https://eprint.iacr.org/2024/525.pdf).
 
 Our code modifies, extends, and integrates the following two code bases:
 
@@ -11,7 +11,7 @@ Our code modifies, extends, and integrates the following two code bases:
     - The relevant work is Constructing Cryptographic Hash Functions from Fixed-Key Blockciphers(Bellare, Hoang, Keelveedhi, and Rogaway), and can be found [here](https://www.iacr.org/cryptodb/data/paper.php?pubkey=23874).
     - The original source code can be obtained here: [JustGarble Code](https://cseweb.ucsd.edu/groups/justgarble/).
 
-Note that you do not need to indenpendently obtain this code in order to clone, build, and use our codebase, but we provide the links here for reference.
+Note that you do not need to independently obtain this code in order to clone, build, and use our codebase, but we provide the links here for reference.
 
 
 ## Description
