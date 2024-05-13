@@ -1,6 +1,6 @@
 # biom-auth
 
-This repository corresponds to the implementation in the article "**Privacy Preserving Biometric Authentication for Fingerprints and Beyond**" published in the Proceedings of the Fourteenth ACM Conference on Data and Application Security and Privacy, 2024. The full version can be found [here](https://eprint.iacr.org/2024/525.pdf).
+This repository corresponds to the implementation in the article "**Privacy Preserving Biometric Authentication for Fingerprints and Beyond**" by Marina Blanton and Dennis Murphy published in the Proceedings of the Fourteenth ACM Conference on Data and Application Security and Privacy (CODASPY), 2024. The full version can be found [here](https://eprint.iacr.org/2024/525.pdf).
 
 Our code modifies, extends, and integrates the following two code bases:
 
