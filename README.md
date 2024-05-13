@@ -22,7 +22,7 @@ Additional relevant functionality is included within our codebase and may be hel
 ## Usage
 
 ### Set up the environment
-The following assumes a Linux machine with a BASH shell, and if applicable (for results collecting in reproducibility experiments) an up to date Python interpreter installed (version 3.6+). This code has been verified to work on current Ubuntu and openSUSE Leap installations.
+The following assumes a Linux machine with a BASH shell, and if applicable (for results collecting in reproducibility experiments) an up to date Python interpreter installed (version 3.6+). This code has been verified to work on current Ubuntu and openSUSE installations.
 
 Our source code is hosted in a GitHub repository, with instructions described below. The following software is required (all available free of charge):
 
@@ -55,6 +55,8 @@ We provide two bash shell scripts, `batch_test.sh` and `batch_test_local.sh`. Th
 
 ### To run the relevant tests, do the following:
 
+Open three terminals in the `biom-auth/OTExtension/build/` directory. Then in each, run the following command with the same arguments, with the exception that each peer id in {0, 1, 2} is invoked exactly once. The instances do not need to be started in any particular order.
+
   - `batch_test.sh` runs all relevant test for a given network setting, based on a configuration you provide.
     - It is expected that a file named `runtime-conif-<config file suffix>` exists in the host working directory (`runtime-config-local` is provided; details are given below).
     - The command structure is
@@ -76,15 +78,15 @@ We provide two bash shell scripts, `batch_test.sh` and `batch_test_local.sh`. Th
 
   - Each test parameterization will output individual `time_test_results_*.csv` and `comm_test_results_*.csv` files, for timing and communication respectively.
   - After all tests have completed, from within the `biom-auth/OTExtension/build` directory, issue `python3 extract_time_results.py results`.
-    - The time results will be collected and averaged from the raw files output by the test programs, and the results will be placed in `compiled_test_results.csv`.
-  - During the build process, fresh authentication circuits are generated for use in testing and stored in `biom-auth/OTExtension/build/circuit_files` as well as `biom-auth/JustGarble/circuit_files`.
+    - The time results will be collected and averaged from the raw files output by the test programs, and the results will be placed in `biom-auth/OTExtension/build/results/compiled_test_results.csv`.
+  - Note that during the build process, fresh authentication circuits are generated for use in testing and stored in `biom-auth/OTExtension/build/circuit_files` as well as `biom-auth/JustGarble/circuit_files`.
     - Circuit information is output into files `cs-192-8-sh.txt`, `cs-192-8-mal.txt`, `ed-192-8-sh.txt`, and `ed-192-8-mal.txt`.
     - This information includes the number of gates and wires, along with breakdown of gates by type.
-    - A number of simulations are also run and results from these are provided, including total number of clock cycles and cycles per gate for each of garbling and evaluation time.
+    - A number of simulations are also run concurrently with circuit generation, and results from these are provided, including total number of clock cycles and cycles per gate, for each of garbling and evaluation time.
 
 ### Generating new circuits for use in JustGarble
 
-As part of the build process, the program to generate and test boolean circuits for use in JustGarble is compiled and used to generate new circuits. The program can be used in conjuntion with the codebase to generate modified authentication circuits, and can be adapted for mre general purposes. It can be found in `biom-auth/JustGarble/bin` and is used as follows:
+As part of the build process, the program to generate and test boolean circuits for use in JustGarble is compiled and used to generate new circuits. The program can be used in conjuntion with the codebase to generate modified authentication circuits, and can be adapted for more general purposes. It can be found in `biom-auth/JustGarble/bin` and is used as follows:
 
   - The command structure is
     - `./circuit_test_and_gen.sh <algorithm> <num inputs> <input length> <opts...>`
@@ -96,17 +98,17 @@ As part of the build process, the program to generate and test boolean circuits 
         - `file` - Alg loaded from file
         - `all` - All Algs
       - `<num inputs>` is the length of the biometric input vector.
-      - `<input length>`is the size of each biometric input vector element.
-      - If `<algorithm> == file`, then either
-        - (1) the next argument is a filename, which should be found in `biom-auth/JustGarble/circuit_files`, or
-        - (2) no argument follows, and a menu listing the files in `biom-auth/JustGarble/circuit_files` will be provided, with the option to select one for simulation.
+      - `<input length>` is the size of each biometric input vector element.
       - `<num inputs>` and `<input length>` apply to `<algorithm> != file`, and must be unsigned integers signifying a number of inputs, and respectively, the length of each, which are appropriate for the chosen algorithm.
+      - If `<algorithm> == file`, then either
+        - the next argument is a filename, which should be found in `biom-auth/JustGarble/circuit_files`, or
+        - no argument follows, and a menu listing the files in `biom-auth/JustGarble/circuit_files` will be provided, with the option to select one for simulation.
       - if `<algorithm> != file`, then `<opts...>` may be:
-       - General options:
-        - `new` - if you wish to force a new circuit build rather than automatically read from file.
-      - Biometric authentication specific options:
-        - `mal` - if you wish to include commitment checking and output the result as a second bit.
-        - `sha3-256` - if you wish to use SHA3-256 as the commitment function (default is SHA2-256)
+        - General options:
+          - `new` - if you wish to force a new circuit build rather than automatically read from file.
+        - Biometric authentication specific options:
+          - `mal` - if you wish to include commitment checking and output the result as a second bit.
+          - `sha3-256` - if you wish to use SHA3-256 as the commitment function (default is SHA2-256)
     - Note that you may issue 'make cleanscd' to delete all saved circuit files.
 
 
