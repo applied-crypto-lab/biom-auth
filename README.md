@@ -8,14 +8,14 @@ Our code modifies, extends, and integrates the following two code bases:
     - The publication most relevant to our work is that of More Efficient Oblivious Transfer Extensions with Security for Malicious Adversaries (Asharov, Lindell, Schneider, and Zohner), and can be found [here](https://eprint.iacr.org/2015/061.pdf).
     - Further information about this and other related works, and the originating code library can be found at the repository: [encryptogroup/OTExtension repository](https://github.com/encryptogroup/OTExtension).
   - JustGarble
-    - The relevant work is Constructing Cryptographic Hash Functions from Fixed-Key Blockciphers(Bellare, Hoang, Keelveedhi, and Rogaway), and can be found [here](https://www.iacr.org/cryptodb/data/paper.php?pubkey=23874).
+    - The relevant work is Constructing Cryptographic Hash Functions from Fixed-Key Blockciphers (Bellare, Hoang, Keelveedhi, and Rogaway), and can be found [here](https://www.iacr.org/cryptodb/data/paper.php?pubkey=23874).
     - The original source code can be obtained here: [JustGarble Code](https://cseweb.ucsd.edu/groups/justgarble/).
 
 Note that you do not need to independently obtain this code in order to clone, build, and use our codebase, but we provide the links here for reference.
 
 
 ## Description
-Our work treats outsourced biometric authentication in a two-phase, one-client two-server model, where one server is considered to be the primary server (and is always considered non-malicious). Specifically, we treat two adversarial models: one in which both servers are semihonest and only the client is malicious, and the other where the second "helper" server is malicious and possibly colludes with the client. We focus our experiments on using cosine similarity and Euclidean distance with respect to the fixed length fingerprint representation due to Engelsma, Cao, and Jain, found in this [paper](https://arxiv.org/pdf/1909.09901). Our codebase tests our protocol in two network settings, LAN, and mixed internet. Details can be found in the paper above and the experiments are intended to replicate the scnarios found in Table 1 therein.
+Our work treats outsourced biometric authentication in a two-phase, one-client two-server model, where one server is considered to be the primary server (and is always considered non-malicious). Specifically, we treat two adversarial models: one in which both servers are semihonest and only the client is malicious, and the other where the second "helper" server is malicious and possibly colludes with the client. We focus our experiments on using cosine similarity and Euclidean distance with respect to the fixed length fingerprint representation due to Engelsma, Cao, and Jain, found in this [paper](https://arxiv.org/pdf/1909.09901). Our codebase tests our protocol in two network settings, LAN, and mixed internet. Details can be found in the paper above and the experiments are intended to replicate the scenarios found in Table 1 therein.
 
 Additional relevant functionality is included within our codebase and may be helpful in its own right, such as computation of boolean gates via oblivious transfer, as well as garbled circuits evaluating Hamming distance comparison, floating point operations, SHA- and AES-circuits. We also extend JustGarble to include systematic efficient incorporation of constant public input values.
 
@@ -61,17 +61,17 @@ Open three terminals in the `biom-auth/OTExtension/build/` directory. Then in ea
     - It is expected that a file named `runtime-conif-<config file suffix>` exists in the host working directory (`runtime-config-local` is provided; details are given below).
     - The command structure is
       - `./batch_test.sh <peer_id> <network setting> <network device name> <config file suffix>`
-        - `<peer id>` in {0, 1, 2} == {Server 1, Server 2, Client}
+        - `<peer id>` in {0, 1, 2} == {Server 1, Server 2, Client}.
         - `<config file suffix>`
-          - The name of the config file must be of the form "runtime-config-X" where X can be any name you would like to give any custom file you create.          -
+          - The name of the config file must be of the form "runtime-config-X" where X can be any name you would like to give any custom file you create.
           - We have provided a file named runtime-config-local, which is the default file if this parameter is left blank. This file is set up to allow testing of all computational parties on the same machine.
           - In order to use this program in a true distributed network environment, one would need to enter the IP addresses, ports, and key files where your machines can accept TCP communication, into a copy of this file and rename it with a different suffix.
-        - `<network setting>` in {"LAN", "internet"}
-        - `network device name>` is the name of the network interface you wish to use. `eth0` is default, but you should check this on each machine. If the `iproute` package is installed, you can issue `ip -o link show` to obtain a list of active network devices.
+        - `<network setting>` in {"local", "LAN", "internet"}.
+        - `<network device name>` is the name of the network interface you wish to use. `eth0` is default, but you should check this on each machine. If the `iproute` package is installed, you can issue `ip -o link show` to obtain a list of active network devices.
     - The results will be stored in csv files and moved to the subdirectory of `biom-auth/OTExtension/build/results` corresponding to `<network setting>`.
   - `batch_test_local.sh` runs all relevant test on the localhost. This is a bit faster than the LAN scenario and not directly tested in our results, but can be used immediately after installation and building to verify that the core functionality works properly.
-    - Results will be saved to `biom-auth/OTExtension/build/results/local`
-    - This shell script takes no paramters. In particular, `runtime-config-local` is used for this since no other configuration is meaningful.
+    - Results will be saved to `biom-auth/OTExtension/build/results/local`.
+    - This shell script takes no parameters. In particular, `runtime-config-local` is used for this since no other configuration is meaningful.
 
 
 ### Collecting experimental data:
@@ -86,7 +86,7 @@ Open three terminals in the `biom-auth/OTExtension/build/` directory. Then in ea
 
 ### Generating new circuits for use in JustGarble
 
-As part of the build process, the program to generate and test boolean circuits for use in JustGarble is compiled and used to generate new circuits. The program can be used in conjuntion with the codebase to generate modified authentication circuits, and can be adapted for more general purposes. It can be found in `biom-auth/JustGarble/bin` and is used as follows:
+As part of the build process, the program to generate and test boolean circuits for use in JustGarble is compiled and used to generate new circuits. The program can be used in conjunction with the codebase to generate modified authentication circuits, and can be adapted for more general purposes. It can be found in `biom-auth/JustGarble/bin` and is used as follows:
 
   - The command structure is
     - `./circuit_test_and_gen.sh <algorithm> <num inputs> <input length> <opts...>`
