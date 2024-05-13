@@ -119,7 +119,7 @@ for net_model in ["local", "LAN", "internet"]:
         csv_file = open(results_fname, "r")
         csv_lines = csv_file.readlines()
         csv_file.close()
-        csv_splits.append([line.split(",") for line in csv_lines if ((',,,' not in line) and (len(line) > 2))])
+        csv_splits.append([line.split(",") for line in csv_lines])
       if all_files_found:
         process_data(csv_splits, net_model, threat_model, dist_func, results_dir)
         print("Processed time results for net model", net_model, "threat model", threat_model, "and distance function", dist_func)
